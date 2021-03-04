@@ -17,7 +17,7 @@ function Home() {
   };
   useEffect(() => {
     console.log("in useeffect...");
-    fetchUsers(page);
+    fetchUsers();
   }, [page]);
   return (
     <div className="container">
