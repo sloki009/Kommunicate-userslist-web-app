@@ -181,6 +181,7 @@ svg {
     }
     .modal-content {
         width: 90% !important;
+        height: 70% !important;
     }
 }
 
