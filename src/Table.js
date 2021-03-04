@@ -4,15 +4,13 @@ import UserDetails from "./UserDetails";
 import Modal from "./Modal";
 
 let max_range = MAX_USERS_PER_PAGE;
-let min_range = 0;
+//let min_range = 0;
 let curPagination = 1;
 
 function Table({ data }) {
-  //const [pageNum, setPageNum] = useState(1);
   const [modal, setModal] = useState({ modalShow: false, modalInfo: "" });
-  const [searchedUser, setSearchedUser] = useState("");
+  //const [searchedUser, setSearchedUser] = useState("");
   const [tableData, setTableData] = useState([]);
-  //const [curTableWholeData, setCurTableWholeData] = useState([]);
 
   useEffect(() => {
     const initailTableData = () => {
@@ -30,7 +28,6 @@ function Table({ data }) {
   }, [data]);
 
   const handleModal = (info = "") => {
-    //console.log("in handlemodal", info);
     setModal({
       modalShow: !modal.modalShow,
       modalInfo: !modal.modalShow ? <UserDetails user={info} /> : "",
@@ -40,25 +37,22 @@ function Table({ data }) {
   console.log(data);
   const handlePaginationClick = (e, page) => {
     e.preventDefault();
-    if (e.target.className != "pagination_active") {
-      //console.log("not  active");
+    if (e.target.className !== "pagination_active") {
       document
         .querySelector(".pagination_active")
         .classList.remove("pagination_active");
       e.target.className = "pagination_active";
     }
-    //console.log(e.target, e.target.className);
     curPagination = page;
     setTableData(
       data.slice(max_range * page - MAX_USERS_PER_PAGE, max_range * page)
     );
-    //setPageNum(page);
   };
 
   const handleSearchChange = (e) => {
     console.log("in handleSearchChange", e.target.value);
     console.log("matchedres...");
-    if (e.target.value == "") {
+    if (e.target.value === "") {
       setTableData(
         data.slice(
           max_range * curPagination - MAX_USERS_PER_PAGE,
@@ -77,7 +71,6 @@ function Table({ data }) {
           alert("Error faced while filtering results");
         });
     }
-    //setSearchedUser(e.target.value);
   };
 
   const getSearchMatchedData = (query) => {
@@ -102,14 +95,12 @@ function Table({ data }) {
         throw new Error(JSON.stringify({ data: temp, status: 500 }));
       }
     });
-    //return temp;
   };
 
   return (
     <div className="table">
       <div className="table_search_container">
         <input
-          //value={searchedUser}
           placeholder="search user(id/name/email)..."
           className="table_search"
           onChange={(e) => handleSearchChange(e)}
