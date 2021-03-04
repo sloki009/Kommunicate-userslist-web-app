@@ -84,10 +84,17 @@ function Table({ data }) {
           )
           .filter((user) => {
             return (
-              user["id"].toString()?.includes(query) ||
-              user["first_name"]?.includes(query) ||
-              user["last_name"]?.includes(query) ||
-              user["email"]?.includes(query)
+              user["id"]
+                .toString()
+                ?.toLowerCase()
+                ?.includes(query?.toLowerCase()) ||
+              user["first_name"]
+                ?.toLowerCase()
+                ?.includes(query?.toLowerCase()) ||
+              user["last_name"]
+                ?.toLowerCase()
+                ?.includes(query?.toLowerCase()) ||
+              user["email"]?.toLowerCase()?.includes(query?.toLowerCase())
             );
           });
         resolve({ data: temp, status: 200 });
